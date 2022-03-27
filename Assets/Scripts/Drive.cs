@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Drive : MonoBehaviour
 {
-    [SerializeField] float turnSpeed = 0.1f;
-    [SerializeField] float moveSpeed = 0.01f;
+    [SerializeField] float turnSpeed = 100f;
+    [SerializeField] float moveSpeed = 15f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,9 @@ public class Drive : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0f, 0f, turnSpeed);
-        transform.Translate(0f, moveSpeed, 0f);
+        float turnAmount = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
+        float moveAmount = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        transform.Rotate(0f, 0f, -turnAmount);
+        transform.Translate(0f, moveAmount, 0f);
     }
 }
